@@ -2,11 +2,12 @@
 
 public class RotationGimmick : MonoBehaviour, Gimmick
 {
-
     public float volume = 0.5f;
     public bool flag = false;
     public float stopTime = 0f;
     private float nowTime = 0;
+
+    public bool Executed { get; private set; }
 
     void Update()
     {
@@ -17,6 +18,7 @@ public class RotationGimmick : MonoBehaviour, Gimmick
             if (nowTime >= stopTime)
             {
                 flag = false;
+                Executed = true;
             }
         }
     }

@@ -6,12 +6,13 @@ public class GameController : SingletonMonoBehaviour<GameController>
 {
     private int popupCounter = 0;
 
-    public GameObject cube1;
     public GameObject gotonPopup;
     public GameObject wiinPopup;
     public GameObject kuruPopup;
     public GameObject biyonPopup;
-    public Transform playerTransform;
+    public GameObject patiPopup;
+
+    public GameObject girlfriend;
 
     /// <summary>
     /// Find nearest gimmick from Player
@@ -50,12 +51,6 @@ public class GameController : SingletonMonoBehaviour<GameController>
         targetButton.GetComponent<Button>().interactable = false;
     }
 
-    // Use this for initialization
-    void Start()
-    {
-        cube1 = GameObject.Find("Cube1");
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -70,6 +65,12 @@ public class GameController : SingletonMonoBehaviour<GameController>
                 biyonPopup.SetActive(false);
                 popupCounter = 0;
             }
+        }
+
+        // clear check
+        if (girlfriend.GetComponent<RotationGimmick>().Executed)
+        {
+            patiPopup.SetActive(true);
         }
     }
 
