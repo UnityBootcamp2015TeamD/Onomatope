@@ -110,7 +110,7 @@ public class GameController : SingletonMonoBehaviour<GameController>
         // ここでクリックされた擬音語とギミックを対応づけている
         switch (onomatope)
         {
-            case "ゴトッ":
+            case "ゴォン":
                 gimmick = nearest.GetComponent<FallflatGimmick>();
                 break;
             case "ビヨーン":
