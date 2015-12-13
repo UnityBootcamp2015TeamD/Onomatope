@@ -91,7 +91,7 @@ public class GameController : SingletonMonoBehaviour<GameController>
                 kuruPopup.SetActive(true);
                 break;
             case 4:
-                biyonPopup.GetComponent<Transform>().position = position + new Vector3(0, 2, 0);
+                biyonPopup.GetComponent<Transform>().position = position;
                 biyonPopup.SetActive(true);
                 break;
 
@@ -101,17 +101,30 @@ public class GameController : SingletonMonoBehaviour<GameController>
 
     public void OnOnomatopeClicked(string onomatope)
     {
-        var nearest = FindNearestGimmick(3);
+        var nearest = FindNearestGimmick(5);
         if (nearest == null) return;
 
+        Gimmick gimmick = null;
+
+        // ここでクリックされた擬音語とギミックを対応づけている
         switch (onomatope)
         {
             case "ゴトッ":
-                var gimmick = nearest.GetComponent<FallflatGimmick>();
-                if (gimmick == null) return;
-                gimmick.ExecuteFallflat();
-                DisableOnomatopeButton(onomatope);
+                gimmick = nearest.GetComponent<FallflatGimmick>();
+                break;
+            case "ビヨーン":
+                gimmick = nearest.GetComponent<StretchGimmick>();
+                break;
+            case "クルッ":
+                gimmick = nearest.GetComponent<RotationGimmick>();
+                break;
+            case "ウィーン":
+                gimmick = nearest.GetComponent<ElevatorGimmick>();
                 break;
         }
+
+        if (gimmick == null) return;
+        gimmick.Execute();
+        DisableOnomatopeButton(onomatope);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FallflatGimmick : MonoBehaviour
+public class FallflatGimmick : MonoBehaviour, Gimmick
 {
     /// <summary>
     /// The effort point.
@@ -11,7 +11,7 @@ public class FallflatGimmick : MonoBehaviour
     public Vector3 forcePosition = new Vector3(0, 0, 0);
     public Vector3 forceVector = new Vector3(1000, 0, 0);
 
-    public void ExecuteFallflat()
+    public void Execute()
     {
         var rigidbody = GetComponent<Rigidbody>();
         var worldCoordinate = forcePosition + rigidbody.position;
