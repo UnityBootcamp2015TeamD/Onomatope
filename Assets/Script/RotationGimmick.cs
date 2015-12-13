@@ -3,26 +3,29 @@
 public class RotationGimmick : MonoBehaviour, Gimmick
 {
     private bool flag = false;
+    public Vector3 originalAngle;
+    public Vector3 rotatedAngle;
 
     public Vector3 axis = new Vector3(0, 1, 0);
     public float rotation = 90f;
-    public float speed = 0.5f;
+    public float speed = 0.1f;
 
     public bool Executed { get; private set; }
-    public float CurrentAngle { get; private set; }
 
     private void Start()
     {
-        CurrentAngle = 0;
+        originalAngle = gameObject.transform.rotation.eulerAngles;
+        rotatedAngle = new Vector3();
     }
 
     private void Update()
     {
         if (flag)
         {
-            CurrentAngle += speed;
-            gameObject.transform.rotation = Quaternion.Euler(axis * CurrentAngle);
-            if (CurrentAngle >= rotation)
+            rotatedAngle += speed * axis * Time.deltaTime;
+            gameObject.transform.rotation = Quaternion.Euler(originalAngle + rotatedAngle);
+            Debug.Log(Vector3.Dot(rotatedAngle, axis));
+            if (Vector3.Dot(rotatedAngle, axis) >= rotation)
             {
                 flag = false;
                 Executed = true;
