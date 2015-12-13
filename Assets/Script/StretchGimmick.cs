@@ -2,29 +2,29 @@
 
 public class StretchGimmick : MonoBehaviour, Gimmick
 {
-    public float speed = 0.2f;
-    public float stopTime = 5f;
-    private float nowTime = 0;
-
-    private Vector3 mySize;
-
+    private Vector3 stretchDirection = new Vector3(0, 0, 1);
+    private Vector3 originalSize;
     private bool flag = false;
+
+    public float speed = 0.2f;
+    public float stretchSize = 5f;
+
+    public Vector3 CurrentSize { get; private set; }
 
     private void Start()
     {
-        mySize = this.gameObject.transform.localScale;
+        CurrentSize = gameObject.transform.localScale;
+        originalSize = CurrentSize;
     }
 
     private void Update()
     {
         if (flag)
         {
-            this.gameObject.transform.localScale = new Vector3(0, 0, speed) + mySize;
-            mySize = this.gameObject.transform.localScale;
+            CurrentSize += stretchDirection * speed;
+            gameObject.transform.localScale = CurrentSize;
 
-            nowTime += Time.deltaTime;
-
-            if (nowTime >= stopTime)
+            if (CurrentSize.z - originalSize.z >= stretchSize)
             {
                 flag = false;
             }
