@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-public class BrigdeFunk : MonoBehaviour {
+public class RotationGimmick : MonoBehaviour {
 
 	public float volume = 0.5f;
 	public bool flag = false;

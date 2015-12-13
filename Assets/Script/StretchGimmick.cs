@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ByonFink : MonoBehaviour {
+public class StretchGimmick : MonoBehaviour {
 
 	public bool flag = false;
 	public bool nearFlag = false;

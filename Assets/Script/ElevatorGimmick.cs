@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ElevatorFunk : MonoBehaviour {
+public class ElevatorGimmick : MonoBehaviour {
 
 	public bool  flag	 = false;
 	public float speed 	 = 0.2f;
