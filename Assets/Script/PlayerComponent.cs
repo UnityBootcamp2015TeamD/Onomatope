@@ -32,10 +32,10 @@ public class PlayerComponent : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        // check gameover
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         if (other.gameObject.name == "Ground")
         {
-            // gameover
             Application.LoadLevel(Application.loadedLevel);
         }
 
