@@ -3,20 +3,25 @@ using UnityEngine.UI;
 
 public class ElevatorGimmick : MonoBehaviour, Gimmick
 {
-    public bool flag = false;
-    public float speed = 0.2f;
-    public float stopTime = 0f;
-    private float nowTime = 0;
+    private bool flag = false;
+    private Vector3 currentPosition;
 
-    void Update()
+    public float speed = 0.2f;
+    public float elevateHeight = 5f;
+
+    private void Start()
+    {
+        currentPosition = gameObject.transform.position;
+    }
+
+    private void Update()
     {
         if (flag)
         {
-            this.gameObject.transform.Translate(0, speed, 0);
+            currentPosition.y += speed;
+            gameObject.transform.position = currentPosition;
 
-            nowTime += Time.deltaTime;
-
-            if (nowTime >= stopTime)
+            if (currentPosition.y >= elevateHeight)
             {
                 flag = false;
             }
