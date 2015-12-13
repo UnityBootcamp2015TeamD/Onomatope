@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
 
-public class GameController : MonoBehaviour
+public class GameController : SingletonMonoBehaviour<GameController>
 {
+    private int popupCounter = 0;
+
     public GameObject cube1;
     public GameObject gotonPopup;
     public GameObject wiinPopup;
@@ -11,7 +13,33 @@ public class GameController : MonoBehaviour
     public GameObject biyonPopup;
     public Transform playerTransform;
 
-    private int popupCounter = 0;
+    /// <summary>
+    /// Find nearest gimmick from Player
+    /// </summary>
+    /// <param name="distanceMax">Upper bounds of distance</param>
+    /// <returns>nearest object or null</returns>
+    private GameObject FindNearestGimmick(float distanceMax)
+    {
+        GameObject result = null;
+        var currentDistance = float.MaxValue;
+
+        var gimmicks = GameObject.FindGameObjectsWithTag("GimmickObject");
+        var player = GameObject.FindGameObjectWithTag("Player");
+
+        var playerPosition = player.GetComponent<Transform>().position;
+        foreach (var gimmick in gimmicks)
+        {
+            var gimmickPosition = gimmick.GetComponent<Transform>().position;
+            var distance = (playerPosition - gimmickPosition).magnitude;
+            if (distance < currentDistance && distance < distanceMax)
+            {
+                currentDistance = distance;
+                result = gimmick;
+            }
+        }
+
+        return result;
+    }
 
     // Use this for initialization
     void Start()
@@ -42,6 +70,8 @@ public class GameController : MonoBehaviour
         switch (code)
         {
             case 1:
+                Debug.Log(gotonPopup);
+                Debug.Log(wiinPopup);
                 gotonPopup.GetComponent<Transform>().position = position + offset;
                 gotonPopup.SetActive(true);
                 break;
@@ -64,23 +94,17 @@ public class GameController : MonoBehaviour
 
     public void OnOnomatopeClicked(int code)
     {
+        var nearest = FindNearestGimmick(3);
+        if (nearest == null) return;
+
         if (code == 1)
         {
-            var player = GameObject.Find("Player");
-            var target = GameObject.Find("Cube1");
-            var distance = player.GetComponent<Rigidbody>().position - target.GetComponent<Rigidbody>().position;
+            var gimmick = nearest.GetComponent<FallflatGimmick>();
+            if (gimmick == null) return;
 
-            Debug.Log(distance.magnitude);
-            if (distance.magnitude < 2)
-            {
-                var rigid = cube1.GetComponent<Rigidbody>();
-                rigid.AddForceAtPosition(new Vector3(1000, 0, 0), rigid.position);
-
-                var button = GameObject.Find("OnomatopeButton1").GetComponent<Button>();
-                button.interactable = false;
-
-                RaisePopup(1, rigid.position);
-            }
+            gimmick.ExecuteFallflat();
+            var button = GameObject.Find("OnomatopeButton1").GetComponent<Button>();
+            button.interactable = false;
         }
     }
 }

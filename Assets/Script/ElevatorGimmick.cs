@@ -47,7 +47,6 @@ public class ElevatorGimmick : MonoBehaviour {
 		
 		player = GameObject.FindGameObjectWithTag ("Player");
 		float dis = Vector3.Distance (player.transform.position, this.gameObject.transform.position);
-		Debug.Log (dis);
 		if (dis < dis_vol) {
 			nearFlag = true;
         }
