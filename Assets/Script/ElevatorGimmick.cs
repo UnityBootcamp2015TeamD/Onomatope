@@ -18,7 +18,7 @@ public class ElevatorGimmick : MonoBehaviour, Gimmick
     {
         if (flag)
         {
-            currentPosition.y += speed;
+            currentPosition.y += speed * Time.deltaTime;
             gameObject.transform.position = currentPosition;
 
             if (currentPosition.y >= elevateHeight)

@@ -21,7 +21,7 @@ public class StretchGimmick : MonoBehaviour, Gimmick
     {
         if (flag)
         {
-            CurrentSize += stretchDirection * speed;
+            CurrentSize += stretchDirection * speed * Time.deltaTime;
             gameObject.transform.localScale = CurrentSize;
 
             if (CurrentSize.z - originalSize.z >= stretchSize)
