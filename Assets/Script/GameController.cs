@@ -102,7 +102,7 @@ public class GameController : SingletonMonoBehaviour<GameController>
 
     public void OnOnomatopeClicked(string onomatope)
     {
-        var nearest = FindNearestGimmick(5);
+        var nearest = FindNearestGimmick(7);
         if (nearest == null) return;
 
         Gimmick gimmick = null;
