@@ -2,20 +2,27 @@
 
 public class RotationGimmick : MonoBehaviour, Gimmick
 {
-    public float volume = 0.5f;
-    public bool flag = false;
-    public float stopTime = 0f;
-    private float nowTime = 0;
+    private bool flag = false;
+
+    public Vector3 axis = new Vector3(0, 1, 0);
+    public float rotation = 90f;
+    public float speed = 0.5f;
 
     public bool Executed { get; private set; }
+    public float CurrentAngle { get; private set; }
 
-    void Update()
+    private void Start()
+    {
+        CurrentAngle = 0;
+    }
+
+    private void Update()
     {
         if (flag)
         {
-            this.gameObject.transform.Rotate(0, volume, 0);
-            nowTime += Time.deltaTime;
-            if (nowTime >= stopTime)
+            CurrentAngle += speed;
+            gameObject.transform.rotation = Quaternion.Euler(axis * CurrentAngle);
+            if (CurrentAngle >= rotation)
             {
                 flag = false;
                 Executed = true;
