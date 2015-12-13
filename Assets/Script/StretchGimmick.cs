@@ -34,7 +34,7 @@ public class StretchGimmick : MonoBehaviour {
 
 			if(nowTime >= stopTime){
 
-				var button = GameObject.Find("OnomatopeButton_byon").GetComponent<Button>();
+				var button = GameObject.Find("OnomatopeButtonBiyon").GetComponent<Button>();
 				button.interactable = false;
 				flag = false;
 			}

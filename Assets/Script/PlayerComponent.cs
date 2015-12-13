@@ -44,7 +44,7 @@ public class PlayerComponent : MonoBehaviour
             Debug.Log(other.impulse.magnitude);
             if (other.impulse.magnitude > 4)
             {
-                var button = GameObject.Find("OnomatopeButton1").GetComponent<Button>();
+                var button = GameObject.Find("OnomatopeButtonGoton").GetComponent<Button>();
                 button.interactable = false;
                 gameController.RaisePopup(1, GetComponent<Transform>().position);
             }

@@ -29,7 +29,7 @@ public class RotationGimmick : MonoBehaviour {
             GameObject.Find("GameController").GetComponent<GameController>().RaisePopup(3, GetComponent<Transform>().position);
 
             this.gameObject.transform.Rotate(0,volume,0);
-			var button = GameObject.Find("OnomatopeButton_Kuru").GetComponent<Button>();
+			var button = GameObject.Find("OnomatopeButtonKuru").GetComponent<Button>();
 
             nowTime += Time.deltaTime;
             if (nowTime >= stopTime)

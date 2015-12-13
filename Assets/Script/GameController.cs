@@ -41,6 +41,15 @@ public class GameController : SingletonMonoBehaviour<GameController>
         return result;
     }
 
+    private void DisableOnomatopeButton(string onomatope)
+    {
+        var targetButton = GameObject
+            .FindGameObjectsWithTag("OnomatopeButton")
+            .Where(button => button.GetComponentInChildren<Text>().text == onomatope)
+            .First();
+        targetButton.GetComponent<Button>().interactable = false;
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -70,8 +79,6 @@ public class GameController : SingletonMonoBehaviour<GameController>
         switch (code)
         {
             case 1:
-                Debug.Log(gotonPopup);
-                Debug.Log(wiinPopup);
                 gotonPopup.GetComponent<Transform>().position = position + offset;
                 gotonPopup.SetActive(true);
                 break;
@@ -92,19 +99,19 @@ public class GameController : SingletonMonoBehaviour<GameController>
         popupCounter = 1;
     }
 
-    public void OnOnomatopeClicked(int code)
+    public void OnOnomatopeClicked(string onomatope)
     {
         var nearest = FindNearestGimmick(3);
         if (nearest == null) return;
 
-        if (code == 1)
+        switch (onomatope)
         {
-            var gimmick = nearest.GetComponent<FallflatGimmick>();
-            if (gimmick == null) return;
-
-            gimmick.ExecuteFallflat();
-            var button = GameObject.Find("OnomatopeButton1").GetComponent<Button>();
-            button.interactable = false;
+            case "ゴトッ":
+                var gimmick = nearest.GetComponent<FallflatGimmick>();
+                if (gimmick == null) return;
+                gimmick.ExecuteFallflat();
+                DisableOnomatopeButton(onomatope);
+                break;
         }
     }
 }

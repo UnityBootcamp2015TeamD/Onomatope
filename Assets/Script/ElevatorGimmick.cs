@@ -31,7 +31,7 @@ public class ElevatorGimmick : MonoBehaviour {
 			nowTime += Time.deltaTime;
 			
 			if(nowTime >= stopTime){
-				var button = GameObject.Find("OnomatopeButton_Ween").GetComponent<Button>();
+				var button = GameObject.Find("OnomatopeButtonWiin").GetComponent<Button>();
 				button.interactable = false;
 				flag = false;
 			}
