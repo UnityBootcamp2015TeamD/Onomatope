@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerComponent : MonoBehaviour
 {
-    private float speed = 10f;
+    public float speed = 10f;
 
     public GameController gameController;
 
